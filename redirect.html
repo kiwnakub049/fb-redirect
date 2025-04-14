@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Redirecting…</title></head>
+  <body>
+    <script>
+      const hash = window.location.hash;
+      const token = new URLSearchParams(hash.substring(1)).get('access_token');
+      if (token) {
+        // เปลี่ยน myapp://auth เป็น URL Scheme ที่ Swift รองรับ
+        window.location.href = `myapp://auth?access_token=${token}`;
+      } else {
+        document.body.innerHTML = "<h1>ไม่พบ access token</h1>";
+      }
+    </script>
+  </body>
+</html>
