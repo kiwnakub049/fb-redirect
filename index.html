@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Facebook Redirect</title>
+</head>
+<body style="font-family: sans-serif; padding: 20px">
+  <h3>กำลังประมวลผล...</h3>
+  <p id="status"></p>
+
+  <script>
+    const hash = window.location.hash;
+    const status = document.getElementById("status");
+
+    if (hash.includes("access_token")) {
+      const params = new URLSearchParams(hash.substring(1));
+      const token = params.get("access_token");
+      status.innerText = "✅ พบ access token แล้ว กำลังส่งกลับแอป...";
+
+      // Redirect กลับเข้าแอปผ่าน custom scheme เช่น myapp://auth?access_token=...
+      window.location.href = `myapp://auth?access_token=${token}`;
+    } else {
+      status.innerText = "❌ ไม่พบ access token ใน URL.";
+    }
+  </script>
+</body>
+</html>
